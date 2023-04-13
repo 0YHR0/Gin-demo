@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+<!--    cited from https://jquery.com/download/#Download_jQuery-->
+    <script type="text/javascript" src="../static/js/jquery-3.6.4.js"></script>
+<!--    https://mottie.github.io/tablesorter/docs/-->
+    <script type="text/javascript" src="../static/js/jquery.tablesorter.min.js"></script>
+    <script src="../static/js/test.js"></script>
+<!--    <script src="https://raw.githubusercontent.com/CodeSeven/toastr/master/build/toastr.min.js"></script>-->
+<!--    <link href="https://raw.githubusercontent.com/CodeSeven/toastr/master/build/toastr.min.css" rel="stylesheet"/>-->
+
+</head>
+<body>
+
+<table border="1" id="qtable" class="tablesorter" data-sortlist="[[0,0],[2,0]]">
+    <thead>
+    <tr>
+        <td>Id</td>
+        <td>questionText</td>
+        <td>A</td>
+        <td>B</td>
+        <td>C</td>
+        <td>D</td>
+        <td>Answer(You should input the answer's content instead of ABCD)</td>
+        <td>DifficultyLevel(1: Easy, 2: Medium, 3:Hard)<span class="arrow asc"></span><span class="arrow dsc"></span></td>
+        <td>totalTryNum</td>
+        <td>correctTryNum</td>
+        <td>totalTime</td>
+        <td>detailSolution</td>
+        <td>delete</td>
+        <td>correctness<span class="arrow asc"></span><span class="arrow dsc"></span></td>
+        <td>avgTime(ms)<span class="arrow asc"></span><span class="arrow dsc"></span></td>
+    </tr>
+    </thead>
+    <tbody>
+{{range $i,$v := .questions}}
+    <tr id="question{{$v.Question.Id}}">
+        <td class="ID" id="ID{{$v.Question.Id}}-id">{{$v.Question.Id}}</td>
+        <td class="questionText" id="questionText{{$v.Question.Id}}-id">{{$v.Question.Text}}</td>
+        <td class="answerA" id="answerA{{$v.Question.Id}}-id">{{$v.Question.A}}</td>
+        <td class="answerB" id="answerB{{$v.Question.Id}}-id">{{$v.Question.B}}</td>
+        <td class="answerC" id="answerC{{$v.Question.Id}}-id">{{$v.Question.C}}</td>
+        <td class="answerD" id="answerD{{$v.Question.Id}}-id">{{$v.Question.D}}</td>
+        <td class="correctAnswer" id="correctAnswer{{$v.Question.Id}}-id">{{$v.Question.Answer}}</td>
+        <td class="difficultyLevel" id="difficultyLevel{{$v.Question.Id}}-id">{{$v.Question.DifficultyLevel}}</td>
+        <td class="totalTryNum" id="totalTryNum{{$v.Question.Id}}-id">{{$v.Question.TotalTrialNum}}</td>
+        <td class="correctTryNum" id="correctTryNum{{$v.Question.Id}}-id">{{$v.Question.CorrectTrialNum}}</td>
+        <td class="totalTime" id="totalTime{{$v.Question.Id}}-id">{{$v.Question.TotalTime}}</td>
+        <td class="detailSolution" id="detailSolution{{$v.Question.Id}}-id">{{$v.Question.DetailSolution}}</td>
+        <td class="delete"><button class="deleteBtn" qid="{{$v.Question.Id}}" id="delete{{$v.Question.Id}}-id">delete</button></td>
+        <td class="correctness" id="correctness{{$v.Question.Id}}-id">{{$v.Correctness}}</td>
+        <td class="avgTime" id="avgTime{{$v.Question.Id}}-id">{{$v.AvgTime}}</td>
+    </tr>
+{{end}}
+    </tbody>
+</table>
+<button id="addRow">+</button>
+<div id="minmax">
+    <button id="minmaxBtn">Show the Statistics</button>
+</div>
+<!--<form action="/form" method="post">-->
+<!--    <p>username:<input type="text" name="username"></p>-->
+<!--    <p>password:<input type="password" name="password"></p>-->
+<!--    <button type="submit">submit</button>-->
+<!--</form>-->
+
+</body>
+</html>
+<script type="text/javascript">
+    $(function () {
+        console.log("here");
+        $(".tablesorter").tablesorter({
+            theme : 'blue'
+        });
+    });
+</script>
